@@ -10,7 +10,7 @@ app.use("/public", static);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({ defaultLayout: "main" , partialsDir: __dirname + '/views/partials'}));
 app.set("view engine", "handlebars");
 
 configRoutes(app);

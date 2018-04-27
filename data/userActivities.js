@@ -1,48 +1,45 @@
 const mongoCollections = require("../config/mongoCollections");
-const ActivityType = require("../classes/ActivityType");
-const activtyTypes = mongoCollections.activtyTypes;
+const userActivities = mongoCollections.userActivities;
 const uuidv1 = require('uuid/v1');
 
 let exportedMethods = {
-    getAllActivtyTypes() {
-        return activtyTypes().then(activtyTypesCollection => {
+  /*  getAllActivtyTypes() {
+        return userActivities().then(activtyTypesCollection => {
             return activtyTypesCollection.find().toArray();
         });
     },
     getActivtyTypesById(id) {
-        return activtyTypes().then(activtyTypesCollection => {
+        return userActivities().then(activtyTypesCollection => {
             return activtyTypesCollection.findOne({ _id: id }).then(activtyType => {
                 if (!activtyType) throw "Activity Type not found";
             return activtyType;
         });
     });
-    },
-    addActivtyType(name, description, active, fields) {
-
+    },*/
+    addActivtyType(data) {
+/*
         if (typeof name !== "string") throw "No name provided";
         if (typeof description !== "string") throw "No description provided";
         if (typeof active !== "boolean") throw "active not set";
         if (!Array.isArray(fields)) {
             throw "fields not an array"
-        }
+        }*/
 
-        const activty = new ActivityType(uuidv1(), name,description,active,fields);
-
-        return activtyTypes().then(activtyTypesCollection => {
-
-
-        return activtyTypesCollection
-            .insertOne(activty)
-            .then(newInsertInformation => {
-                return newInsertInformation.insertedId;
-            })
-        .then(newId => {
-            return this.getActivtyTypesById(newId);
+        data._id = uuidv1();
+        data.userId = "tswierad";
+        return userActivities().then(activtyTypesCollection => {
+            return activtyTypesCollection
+                .insertOne(data)
+                .then(newInsertInformation => {
+                    return newInsertInformation.insertedId;
+                })
+            .then(newId => {
+                return "true";
+            });
         });
-        });
-    },
+    }/*,
     removeActivityType(id) {
-        return activtyTypes().then( activtyTypesCollection => {
+        return userActivities().then( activtyTypesCollection => {
             return activtyTypesCollection.removeOne({ _id: id }).then(deletionInfo => {
                 if (deletionInfo.deletedCount === 0) {
                     throw `Could not delete activity type with id of ${id}`;
@@ -82,7 +79,7 @@ let exportedMethods = {
             _id: id
         };
 
-        return activtyTypes().then( activtyTypesCollection => {
+        return userActivities().then( activtyTypesCollection => {
             return activtyTypesCollection
                 .updateOne(query,updateCommand)
                 .then(newInsertInformation => {
@@ -126,7 +123,7 @@ let exportedMethods = {
             _id: id
         };
 
-        return activtyTypes().then( activtyTypesCollection => {
+        return userActivities().then( activtyTypesCollection => {
             return activtyTypesCollection
                 .updateOne(query,updateCommand)
                 .then(newInsertInformation => {
@@ -134,7 +131,7 @@ let exportedMethods = {
             });
         });
 
-    }
+    }*/
 };
 
 module.exports = exportedMethods;

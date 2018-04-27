@@ -1,5 +1,6 @@
 const activityTypeData = require("./activitytype");
-
+const userActivitiesData = require("./userActivities");
 module.exports = {
-    activityTypes: activityTypeData
+    activityTypes: activityTypeData,
+    userActivities: userActivitiesData
 };
