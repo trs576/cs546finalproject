@@ -1,0 +1,26 @@
+<form method="post" action="/login">
+    <h2>Login</h2>
+    <label for="email">Email</label>
+    <input type="text" name="email_login" >
+    <br>
+    <br>
+    <label for="password">Password</label>
+    <input type="password" name="password_login" >
+    <br>
+    <br>
+    <button type="submit">Submit</button>
+   
+    <form method="">
+        <button id="register" type="button" onclick="window.location.href='/jumpage'">Register</button>
+    </form>
+</form>
+
+
+
+
+  
+
+
+{{#if error}}
+<p>{{error}}</p>
+{{/if}}
