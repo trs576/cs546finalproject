@@ -4,6 +4,16 @@ const data = require("../data");
 const activityTypeData = data.activityTypes;
 const userActivitiesData = data.userActivities;
 
+
+router.get("/profile", async (req, res) => {
+    try{
+        res.render("main/profile", {id: req.session.user._id});
+    } catch (e) {
+        res.status(500).send();
+    }
+
+});
+
 router.get("/profile/addactivity", async (req, res) => {
     try{
         const activityList = await activityTypeData.getAllActivtyTypes();

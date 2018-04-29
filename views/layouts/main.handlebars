@@ -20,19 +20,29 @@
                         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="/about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">My Profile</a>
+                        <a class="nav-link" href="/profile">My Profile</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav my-2 my-lg-0">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/register">Register</a>
-                    </li>
+
+                    {{#if session.user}}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#"> Welcome {{session.user.firstname}}</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                    {{else}}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/login">Login</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">Register</a>
+                        </li>
+                        </li>
+                    {{/if}}
                 </ul>
             </div>
         </nav>
