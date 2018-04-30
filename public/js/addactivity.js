@@ -26,6 +26,14 @@ $(document).ready(function () {
 
                     }
 
+                    if (data.fields[i].type.toLowerCase() === "date") {
+                        const html = '<div class="form-group"><label for="'+name+'">'
+                            + data.fields[i].name + '</label><input type="date" class="form-control"' +
+                            ' id="' +name+'" name="'+name+'" placeholder="' + data.fields[i].description +'"></div>';
+                        $(html).appendTo('#addActivityFormFields');
+
+                    }
+
                     if (data.fields[i].type.toLowerCase() === "currency") {
                         const html = '<div class="form-group"><label for="'+name+'">'
                             + data.fields[i].name + '</label><input type="text" class="form-control"' +

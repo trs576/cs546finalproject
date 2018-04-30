@@ -3,11 +3,28 @@ const userActivities = mongoCollections.userActivities;
 const uuidv1 = require('uuid/v1');
 
 let exportedMethods = {
-  /*  getAllActivtyTypes() {
-        return userActivities().then(activtyTypesCollection => {
-            return activtyTypesCollection.find().toArray();
+    getAllUserActivities() {
+        return userActivities().then(userActivitiesCollection => {
+            return userActivitiesCollection.find().toArray();
+        });
+    },getAllUserActivitiesByUserId(userId) {
+        return userActivities().then(userActivitiesCollection => {
+            return userActivitiesCollection.aggregate([
+                { $lookup:
+                        {
+                            from: 'ACTIVITY_TYPES',
+                            localField: 'activityType',
+                            foreignField: '_id',
+                            as: 'activity'
+                        },
+                },{
+                    $match:{userId: userId}
+                }
+            ]).toArray();
         });
     },
+
+    /*
     getActivtyTypesById(id) {
         return userActivities().then(activtyTypesCollection => {
             return activtyTypesCollection.findOne({ _id: id }).then(activtyType => {
@@ -26,9 +43,8 @@ let exportedMethods = {
         }*/
 
         data._id = uuidv1();
-        data.userId = "tswierad";
-        return userActivities().then(activtyTypesCollection => {
-            return activtyTypesCollection
+        return userActivities().then( userActivitiesCollection => {
+            return  userActivitiesCollection
                 .insertOne(data)
                 .then(newInsertInformation => {
                     return newInsertInformation.insertedId;

@@ -8,6 +8,7 @@ const main = async () => {
     const db = await dbConnection();
     await db.dropDatabase();
     let fields=[ new Field(uuidv1(), "location", "Where did the activity take place aka what mountain", "String", true, true ),
+            new Field(uuidv1(), "Date", "Date of the Activity", "Date", true, true ),
             new Field(uuidv1(), "Skis", "What Skis did you use", "String", true, true ),
             new Field(uuidv1(), "Number of Runs", "How many runs did you take?", "Number", true, true ),
             new Field(uuidv1(), "Ticket Cost", "How much did you pay for a lift ticket?", "Currency", true, true ),
