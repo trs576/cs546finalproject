@@ -23,6 +23,25 @@ let exportedMethods = {
             ]).toArray();
         });
     },
+    getUserActivityStats(userId) {
+        return userActivities().then(userActivitiesCollection => {
+            return userActivitiesCollection.aggregate([
+                {
+                    $match:{userId: userId}
+                },
+                { $lookup:
+                        {
+                            from: 'ACTIVITY_TYPES',
+                            localField: 'activityType',
+                            foreignField: '_id',
+                            as: 'activity'
+                        },
+                },
+                {$unwind: '$activity'},
+                {"$group" : {_id:"$activity.name", count:{$sum:1}}}
+            ]).toArray();
+        });
+    },
 
     /*
     getActivtyTypesById(id) {

@@ -7,9 +7,9 @@ const userActivitiesData = data.userActivities;
 
 router.get("/profile", async (req, res) => {
     try{
+        const activityStats = await userActivitiesData.getUserActivityStats(req.session.user._id);
         const activityList = await userActivitiesData.getAllUserActivitiesByUserId(req.session.user._id);
-        console.log(JSON.stringify(activityList));
-        res.render("main/profile", {activities:activityList});
+        res.render("main/profile", {activities:activityList, actvityStats: activityStats});
     } catch (e) {
         res.status(500).send();
     }
