@@ -14,14 +14,14 @@ $(document).ready(function () {
                     if (data.fields[i].type.toLowerCase() === "string") {
                         const html = '<div class="form-group"><label for="'+name+'">'
                             + data.fields[i].name + '</label><input type="text" class="form-control"' +
-                            ' id="' +name+'" name="'+name+'" placeholder="' + data.fields[i].description +'"></div>';
+                            ' id="' +name+'" name="'+name+'" placeholder="' + data.fields[i].description +'" required></div>';
                         $(html).appendTo('#addActivityFormFields');
                     }
 
                     if (data.fields[i].type.toLowerCase() === "number") {
                         const html = '<div class="form-group"><label for="'+name+'">'
-                            + data.fields[i].name + '</label><input type="text" class="form-control"' +
-                            ' id="' +name+'" name="'+name+'" placeholder="' + data.fields[i].description +'"></div>';
+                            + data.fields[i].name + '</label><input type="number" class="form-control numbersOnly"' +
+                            ' id="' +name+'" name="'+name+'" placeholder="' + data.fields[i].description +'" required></div>';
                         $(html).appendTo('#addActivityFormFields');
 
                     }
@@ -29,15 +29,15 @@ $(document).ready(function () {
                     if (data.fields[i].type.toLowerCase() === "date") {
                         const html = '<div class="form-group"><label for="'+name+'">'
                             + data.fields[i].name + '</label><input type="date" class="form-control"' +
-                            ' id="' +name+'" name="'+name+'" placeholder="' + data.fields[i].description +'"></div>';
+                            ' id="' +name+'" name="'+name+'" placeholder="' + data.fields[i].description +'" required></div>';
                         $(html).appendTo('#addActivityFormFields');
 
                     }
 
                     if (data.fields[i].type.toLowerCase() === "currency") {
                         const html = '<div class="form-group"><label for="'+name+'">'
-                            + data.fields[i].name + '</label><input type="text" class="form-control"' +
-                            ' id="' +name+'" name="'+name+'" placeholder="' + data.fields[i].description +'"></div>';
+                            + data.fields[i].name + '</label><input type="number" class="form-control numbersOnly"' +
+                            ' id="' +name+'" name="'+name+'" placeholder="' + data.fields[i].description +'" required></div>';
                         $(html).appendTo('#addActivityFormFields');
                     }
 
@@ -55,5 +55,20 @@ $(document).ready(function () {
                 $("#submitBtn").prop( "disabled", false );
             });
         }
+    });
+    $(document).on('keydown', '.numbersOnly', function(e){
+        if (e.shiftKey === true ) {
+            if (e.which == 9) {
+                return true;
+            }
+            return false;
+        }
+        if (e.which > 57) {
+            return false;
+        }
+        if (e.which==32) {
+            return false;
+        }
+        return true;
     });
 });

@@ -18,30 +18,31 @@ router.get("/register", (req, res) => {
 
 router.post("/register", async (req, res) => {
 
-    // if (!req.body.firstname) throw "firstname cannot be empty"
-    // if (!req.body.lastname) throw "lastname cannot be empty"
-    // if (!req.body.email) throw "email address cannot be empty"
-    // if (!req.body.password) throw "password cannot be empty"
-    // if (!req.body.dateofbirth) throw "date of birth cannot be empty"
-    // if(!req.body.gender)  throw "gender cannot be empty"
 
-    // if (req.body.firstname.length > 20) throw ("firstname address is too long")
-    // if (req.body.lastname.length > 20) throw ("lastname address is too long")
-    // if (req.body.email.length > 50) throw ("email address is too long")
-    // if (req.body.password.length > 20) throw ("password address is too long")
+    let error = "";
+    if (!req.body.firstname) error +="Firstname cannot be empty <br>";
+    if (!req.body.lastname) error +="Lastname cannot be empty  <br>";
+    if (!req.body.email)  error +="Email address cannot be empty  <br> ";
+    if (!req.body.password)  error +="Password cannot be empty <br> ";
+    if (!req.body.dateofbirth) error +="Date of birth cannot be empty <br> ";
+    if(!req.body.gender)  error +="Gender cannot be empty <br> ";
 
-    if (!req.body.firstname) return res.send("firstname cannot be empty");
-    if (!req.body.lastname) return res.send("lastname cannot be empty");
-    if (!req.body.email)  return res.send("email address cannot be empty");
-    if (!req.body.password)  return res.send("password cannot be empty");
-    if (!req.body.dateofbirth) return res.send("date of birth cannot be empty");
-    if(!req.body.gender)  return res.send("gender cannot be empty");
+    if (req.body.firstname.length > 20) error +="Firstname  is too long <br> ";
+    if (req.body.lastname.length > 20) error +="Lastname  is too long <br> ";
+    if (req.body.email.length > 50) error +="Email address is too long  <br>";
+    if (req.body.password.length > 20) error +="Password is too long <br> ";
+    if (req.body.password.length < 8) error +="Password is too short  <br>";
 
-    if (req.body.firstname.length > 20) return res.send("firstname address is too long");
-    if (req.body.lastname.length > 20) return res.send("lastname address is too long");
-    if (req.body.email.length > 50) return res.send("email address is too long");
-    if (req.body.password.length > 20) return res.send("password address is too long");
-
+    try{
+        const user = await dbOperation.getUser(req.body.email);
+        if(user) error +="Email is already used";
+    }catch (e) {
+        res.render("main/register", { error: error});
+    }
+    if(error !== ""){
+        res.render("main/register", { error: error});
+        return;
+    }
     try {
         //use bcrypt
         //const hash = await bcrypt.hash(req.body.password, 10);     
@@ -54,6 +55,7 @@ router.post("/register", async (req, res) => {
         res.redirect("/login");
 
     } catch (e) {
+        res.render("main/register", { error: e});
         console.log(e);
     }
 })

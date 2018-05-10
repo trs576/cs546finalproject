@@ -18,10 +18,22 @@ const main = async () => {
     let id = activity._id;
     console.log(id);
 
-    fields=[ new Field(uuidv1(), "location", "Where did the activity take place", "String", true, true ),
-        new Field(uuidv1(), "Skis", "What Skis did you use", "String", true, true )];
+    fields=[ new Field(uuidv1(), "location", "Where did the activity take place aka what mountain/Track", "String", true, true ),
+        new Field(uuidv1(), "Date", "Date of the Activity", "Date", true, true ),
+        new Field(uuidv1(), "Skis", "What Skis did you use", "String", true, true ),
+        new Field(uuidv1(), "Distance Skied", "How far did you ski?", "Number", true, true )];
     console.log(fields);
     activity = await activityType.addActivtyType("Cross Country Skiing", "Activity of nordic skiing", true, fields);
+    id = activity._id;
+    console.log(id);
+
+    fields=[ new Field(uuidv1(), "location", "Where did the activity take place", "String", true, true ),
+        new Field(uuidv1(), "Date", "Date of the Activity", "Date", true, true ),
+        new Field(uuidv1(), "Miles", "How Far did you run?", "Number", true, true ),
+        new Field(uuidv1(), "Shoes", "What shoes did you wear?", "String", true, true ),
+        new Field(uuidv1(), "Duration", "How long did you run for in minutes?","Number", true, true )];
+    console.log(fields);
+    activity = await activityType.addActivtyType("Run", "Activity of going for a run", true, fields);
     id = activity._id;
     console.log(id);
 

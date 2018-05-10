@@ -5,6 +5,16 @@
         <div class="col-10">
             <div class="container">
                 <h1>Log an Activity</h1>
+                {{#if error}}
+                    <div class="alert alert-danger" role="alert" >
+                        {{error}}
+                    </div>
+                {{/if}}
+                {{#if success}}
+                    <div class="alert alert-success" role="alert" >
+                        {{success}}
+                    </div>
+                {{/if}}
                 <form action="/profile/addactivity" method="POST" class="wordForm">
                     <div class="form-group">
                         <label for="activityType">Select Activity</label>
