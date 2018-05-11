@@ -30,7 +30,7 @@ router.post("/profile/addactivity", async (req, res) => {
     let test = req.body;
     test.userId = req.session.user._id;
     try{
-        const activityList = await userActivitiesData.addActivtyType(test);
+        const activityList = await userActivitiesData.addUserActivity(test);
         res.render("main/addactivity", {activities:activityList, msg: "Activity Successfully Added"});
 
     } catch (e) {
