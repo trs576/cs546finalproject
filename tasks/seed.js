@@ -40,6 +40,13 @@ const main = async () => {
     console.log(fields);
     activity = await activityType.addActivtyType("Run", "Activity of going for a run", true, fields);
     runId = activity._id;
+	
+	fields = [new Field(uuidv1(), "name", "What is the name of the custom activity?", "String", true, true),
+		new Field(uuidv1(), "description", "What is the description of your custom activity?", "String", true, true)];
+    console.log(fields);
+    activity = await activityType.addActivtyType("Custom", "Add a new activity type", true, fields);
+    custId = activity._id;
+
 
     /**
      * creating demo user john snow
@@ -121,7 +128,7 @@ const main = async () => {
         shoes: 'Nike Trainers',
         duration: '46',
         userId: user._id }
-
+		
     await userActivity.addUserActivity(act);
 
     console.log("Done seeding database");
